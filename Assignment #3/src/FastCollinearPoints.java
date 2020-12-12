@@ -17,19 +17,15 @@ public class FastCollinearPoints {
         Arrays.sort(pointsCopy);
         System.out.println(Arrays.toString(pointsCopy));
 
-
-
         Point origin;
         double slope;
 
-        for (int i = 0; i < pointsCopy.length - 3; i++){
+        for (int i = 0; i < pointsCopy.length - 3; i++) {
             origin = pointsCopy[i];
             for (int j = i + 1; j < pointsCopy.length - 2; j++) {
                 slope = origin.slopeTo(pointsCopy[j]);
                 int count = 0;
                 Point lastPoint = null;
-
-
 
                 for (int k = j + 1; k < pointsCopy.length; k++){
                     if (origin.slopeTo(pointsCopy[k]) == slope){
@@ -45,7 +41,6 @@ public class FastCollinearPoints {
 
                     pointSet.add(origin);
                     pointSet.add(lastPoint);
-
                 }
             }
         }
@@ -83,23 +78,12 @@ public class FastCollinearPoints {
         return lineSegmentArrayList.toArray(new LineSegment[numberOfSegments()]);
     }
 
-   private boolean duplicate(Point lastPoint, double slope){
+    private boolean duplicate(Point lastPoint, double slope){
         for (int i = 1; i < pointSet.size(); i = i + 2){
             if (pointSet.get(i) == lastPoint && pointSet.get(i - 1).slopeTo(pointSet.get(i)) == slope){
                 return true;
             }
         }
-
-
-        /*
-        if (pointSet.size() > 1 && pointSet.size() % 2 == 0){
-            for (int i = 0; i < pointSet.size(); i = i + 2) {
-                if (pointSet.get(i).slopeTo(originPoint) == pointSet.get(i).slopeTo(pointSet.get(i + 1))) {
-                    return true;
-                }
-            }
-        }
-        */
 
         return false;
    }
